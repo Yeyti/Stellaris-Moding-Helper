@@ -18,18 +18,13 @@ namespace SMH{
         public Area(ControlBase parent) : base(parent){
             Dock = Dock.Fill;
             SetSize(parent.Width, parent.Height);
-
-
-
             status = new StatusBar(parent);
 
-
-
-
-            if (Global.options["LoadScreen"] == "true"){
+            if (Global.options["LoadBackground"] == "true"){
                 img = new ImagePanel(this);
-                img.ImageName = Global.options["StelarisFolder"] + @"gfx\loadingscreens\load_1.dds";
+                img.ImageName = Global.options["GameFolder"] + @"\gfx\loadingscreens\load_1.dds";
             }
+
             MenuStrip menu = new MenuStrip(this);
             MenuItem mi = menu.AddItem("File").Menu.AddItem("ss");
             for (int i = 0; i < 10; i++)
@@ -59,7 +54,6 @@ namespace SMH{
             tc.IsTabable = true;
             tc.TextColor = new Color(0, 0, 0);
             tc.UpdateColors();
-            dock.LeftDock.SetPosition(0, img.Height - menu.Height);
             dock.LeftDock.Width = 150;
 
 
@@ -89,8 +83,8 @@ namespace SMH{
 
         protected override void Render(Gwen.Skin.SkinBase skin){
             
-            img.Width = Parent.Width;
-             img.Height = Parent.Height;
+            /*img.Width = Parent.Width;
+             img.Height = Parent.Height;*/
              status.Text = String.Format("Stellaris Mod Helper - {0:F0} fps", 60);
             
             base.Render(skin);

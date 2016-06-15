@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.Emit;
 using Gwen;
+using Gwen.CommonDialog;
 using OpenTK;
 using OpenTK.Input;
 using OpenTK.Graphics.OpenGL;
 using Gwen.Control;
 using Gwen.Platform;
 using Gwen.Renderer.OpenTK;
+using Gwen.Xml;
 using OpenTK.Graphics;
 using Key = OpenTK.Input.Key;
 
@@ -108,14 +111,34 @@ namespace SMH
             canvas.BackgroundColor = skin.Colors.ModalBackground;
             //canvas.KeyboardInputEnabled = true;
             canvas.Scale = 1.0f;
-            if (Global.options["StellarisFolder"] == "null")
-            {
-                //var c = new MessageBox(canvas);
+            if (Global.options["GameFolder"] == "null"){
+                var c = new MessageBox(canvas,@Global.lang["SMH.GameFolder.err"]);
+                c.Dismissed += (sender, arguments) =>{
+                    string Text = "";
+                    FolderBrowserDialog dialog = Component.Create<FolderBrowserDialog>(canvas);
+                    dialog.InitialFolder = "C:\\";
+                    dialog.Filters = "*|*";
+                    dialog.Callback = (path) => {
+                        Text = path != null ? path : "Cancelled";
+                        Global.options["GameFolder"] = Text;
+                        Global.SaveCfg(Global.options,"main.cfg");
+                        PostInit();
+                    };
+                };
             }
-            area = new Area(canvas);
+            else{
+                PostInit();
+            }
+            
+            
 
             /*stopwatch.Restart();
             lastTime = 0;*/
+        }
+
+        public void PostInit(){
+            area = new Area(canvas);
+
         }
 
         /// <summary>

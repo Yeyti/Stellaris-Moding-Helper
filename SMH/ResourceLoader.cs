@@ -10,18 +10,35 @@ namespace SMH{
 
         public ResourceLoader(){
             Global.options = new Dictionary<string, string>();
-            foreach (var v in ReadFile(maincfg)){
-                string[] buf = v.Trim(new[]{';',' '}).Split('=');
-                Global.options.Add(buf[0],buf[1]);
-            }
-        }
+            AddData(ref Global.options, maincfg);
 
+            Global.lang=new Dictionary<string, string>();
+            /*if (Global.options["Lang"] == ""){
+                Global.options["Lang"] = "ru";
+            }*/
+            
+            
+            AddData(ref Global.lang, "Res/Lang/" + Global.options["Lang"] + ".lang");
+        }
+        
         public string[] ReadFile(string File){
             string[] s;
-            System.IO.StreamReader file = new System.IO.StreamReader(File);
+            System.IO.StreamReader file = new System.IO.StreamReader(File,Encoding.Default);
             s=file.ReadToEnd().Split('\n');
             file.Close();
             return s;
         }
+
+        public void AddData(ref Dictionary<string,string> d ,string[] s){
+            foreach (var v in s){
+                string[] buf = (v.Trim(new []{';',' ','\r','\t'})).Split('=');
+                if (buf.Length == 2)
+                    d.Add(buf[0], buf[1]);
+            }
+        }
+        public void AddData(ref Dictionary<string, string> d, string file){
+            AddData(ref d, ReadFile(file));
+        }
+
     }
 }
