@@ -13,19 +13,17 @@ namespace SMH{
         private StatusBar status;
         private ImagePanel img;
 
-        public Area(Base parent) : base(parent){
+        public Area(ControlBase parent) : base(parent){
 
             
 
-            Dock = Pos.Fill;
+            //Dock = this.Pos.Fill;
             SetSize(parent.Width, parent.Height);
             status = new StatusBar(parent);
             img = new ImagePanel(this);
             //Bitmap b = ;
-            img.m_Texture = new Texture(Skin.Renderer);
-            img.m_Texture.Load("$ram\\load_1.dds", DDS.LoadImage(@"D:\Games\Stellaris\gfx\loadingscreens/load_1.dds"));
-            
-            Texture t = new Texture(new OpenTK());
+            img.Name = @"D:\Games\Stellaris\gfx\loadingscreens/load_1.dds";
+
             for (int i = 0;i<100;i++){
                 g();
             }
@@ -55,7 +53,7 @@ namespace SMH{
         }
        
 
-        protected override void Render(Gwen.Skin.Base skin){
+        protected override void Render(Gwen.Skin.SkinBase skin){
              img.Width = Parent.Width;
              img.Height = Parent.Height;
              status.Text = String.Format("Stellaris Mod Helper - {0:F0} fps", 60);

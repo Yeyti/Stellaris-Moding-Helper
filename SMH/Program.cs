@@ -7,13 +7,15 @@ using OpenTK.Input;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing;
 using Gwen.Control;
+using Gwen.Renderer.OpenTK;
+
 namespace SMH
 {
     sealed class Window:GameWindow
     {
-        private Gwen.Input.OpenTK input;
-        private Gwen.Renderer.OpenTK renderer;
-        private Gwen.Skin.Base skin;
+        private Gwen.Input.KeyData input;
+        private Gwen.Renderer.OpenTK.OpenTKBase renderer;
+        private Gwen.Skin.SkinBase skin;
         private Canvas canvas;
 
         private Area area;
@@ -79,9 +81,9 @@ namespace SMH
         {
             GL.ClearColor(Color.DimGray);
 
-            renderer = new Gwen.Renderer.OpenTK();
-            //skin = new Gwen.Skin.TexturedBase(renderer, "DefaultSkin.png");
-            skin = new Gwen.Skin.Simple(renderer);
+            renderer = new OpenTKGL40(true);
+            skin = new Gwen.Skin.TexturedBase(renderer, "DefaultSkin.png");
+
             //skin.DefaultFont = new Font(renderer, "Courier", 10);
             canvas = new Canvas(skin);
 
