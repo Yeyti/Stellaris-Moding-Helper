@@ -58,12 +58,11 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DDS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libs\DDS.dll</HintPath>
-    </Reference>
     <Reference Include="Gwen">
       <HintPath>Libs\Gwen.dll</HintPath>
+    </Reference>
+    <Reference Include="Gwen.Platform.Windows">
+      <HintPath>Libs\Gwen.Platform.Windows.dll</HintPath>
     </Reference>
     <Reference Include="Gwen.Renderer.OpenTK">
       <HintPath>Libs\Gwen.Renderer.OpenTK.dll</HintPath>

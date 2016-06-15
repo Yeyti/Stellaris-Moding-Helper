@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using Gwen;
 using OpenTK;
 using OpenTK.Input;
 using OpenTK.Graphics.OpenGL;
-using System.Drawing;
 using Gwen.Control;
+using Gwen.Platform;
 using Gwen.Renderer.OpenTK;
+using Key = OpenTK.Input.Key;
 
 namespace SMH
 {
+    using Color = Gwen.Color;
     sealed class Window:GameWindow
     {
-        private Gwen.Input.KeyData input;
+        private Gwen.Renderer.OpenTK.Input.OpenTK input;
         private Gwen.Renderer.OpenTK.OpenTKBase renderer;
         private Gwen.Skin.SkinBase skin;
         private Canvas canvas;
+
+
 
         private Area area;
         public bool fast = false;
@@ -79,22 +83,25 @@ namespace SMH
         /// <param name="e">Not used.</param>
         protected override void OnLoad(EventArgs e)
         {
-            GL.ClearColor(Color.DimGray);
+
+            GL.ClearColor(System.Drawing.Color.MidnightBlue);
+
+            Platform.Init(new Windows());
 
             renderer = new OpenTKGL40(true);
-            skin = new Gwen.Skin.TexturedBase(renderer, "DefaultSkin.png");
 
-            //skin.DefaultFont = new Font(renderer, "Courier", 10);
+            skin = new Gwen.Skin.TexturedBase(renderer, "Skin.png");
+
+            skin.DefaultFont = new Font(renderer, "Arial", 11);
             canvas = new Canvas(skin);
-
-            input = new Gwen.Input.OpenTK(this);
+            input = new Gwen.Renderer.OpenTK.Input.OpenTK(this);
             input.Initialize(canvas);
 
             canvas.SetSize(Width, Height);
             canvas.ShouldDrawBackground = true;
-            canvas.BackgroundColor = Color.FromArgb(255, 45, 45, 48);
+            canvas.BackgroundColor = skin.Colors.ModalBackground;
             //canvas.KeyboardInputEnabled = true;
-
+            canvas.Scale = 1.0f;
             area = new Area(canvas);
 
             /*stopwatch.Restart();
@@ -108,10 +115,7 @@ namespace SMH
         /// <remarks>There is no need to call the base implementation.</remarks>
         protected override void OnResize(EventArgs e)
         {
-            GL.Viewport(0, 0, Width, Height);
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();
-            GL.Ortho(0, Width, Height, 0, -1, 1);
+            renderer.Resize(Width, Height);
 
             canvas.SetSize(Width, Height);
             OnRenderFrame(null);
@@ -143,9 +147,21 @@ namespace SMH
 
         public override void Dispose()
         {
-            canvas.Dispose();
-            skin.Dispose();
-            renderer.Dispose();
+            if (canvas != null)
+            {
+                canvas.Dispose();
+                canvas = null;
+            }
+            if (skin != null)
+            {
+                skin.Dispose();
+                skin = null;
+            }
+            if (renderer != null)
+            {
+                renderer.Dispose();
+                renderer = null;
+            }
             base.Dispose();
         }
         /// <summary>
