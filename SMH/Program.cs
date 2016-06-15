@@ -8,6 +8,7 @@ using OpenTK.Graphics.OpenGL;
 using Gwen.Control;
 using Gwen.Platform;
 using Gwen.Renderer.OpenTK;
+using OpenTK.Graphics;
 using Key = OpenTK.Input.Key;
 
 namespace SMH
@@ -28,6 +29,8 @@ namespace SMH
 
         public Window(): base(1248, 720)
         {
+            
+
             Keyboard.KeyDown += Keyboard_KeyDown;
             Keyboard.KeyUp += Keyboard_KeyUp;
 
@@ -35,8 +38,11 @@ namespace SMH
             Mouse.ButtonUp += Mouse_ButtonUp;
             Mouse.Move += Mouse_Move;
             Mouse.WheelChanged += Mouse_Wheel;
+            
 
         }
+
+ 
 
         void Keyboard_KeyDown(object sender, KeyboardKeyEventArgs e)
         {
@@ -64,6 +70,7 @@ namespace SMH
 
         void Mouse_ButtonUp(object sender, MouseButtonEventArgs args)
         {
+
             input.ProcessMouseMessage(args);
         }
 
@@ -126,7 +133,7 @@ namespace SMH
         /// </summary>
         /// <param name="e">Contains timing information.</param>
         /// <remarks>There is no need to call the base implementation.</remarks>
-        protected override void OnUpdateFrame(FrameEventArgs e)
+        protected void OnUpdateFrame(FrameEventArgs e)
         {
             
         }
@@ -136,11 +143,12 @@ namespace SMH
         /// </summary>
         /// <param name="e">Contains timing information.</param>
         /// <remarks>There is no need to call the base implementation.</remarks>
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e){
+            
             GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+            
             canvas.RenderCanvas();
-
+            
 
             SwapBuffers();
         }
