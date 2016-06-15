@@ -6,10 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Gwen.Control;
 
 namespace SMH
 {
-    internal class Sciencebox {// : PictureBox{
+    internal class Sciencebox {
+        public Sciencebox(ImagePanel img, string dGamesStellarisGfxLoadingscreensLoadDds){
+            throw new NotImplementedException();
+        }
+
+// : PictureBox{
        /* public PictureBox[] img;
         
         private int XMouseClick;

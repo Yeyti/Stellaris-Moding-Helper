@@ -88,7 +88,7 @@ namespace SMH
 
             Platform.Init(new Windows());
 
-            renderer = new OpenTKGL40(true);
+            renderer = new OpenTKGL40();
 
             skin = new Gwen.Skin.TexturedBase(renderer, "Skin.png");
 

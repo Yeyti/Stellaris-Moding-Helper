@@ -83,6 +83,7 @@
     <Compile Include="BSpline.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Science.cs" />
     <Compile Include="Sciencebox.cs" />
     <Compile Include="GL\Shader.cs" />
     <Compile Include="GL\ShaderProgram.cs" />
