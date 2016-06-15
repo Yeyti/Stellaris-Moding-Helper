@@ -97,8 +97,7 @@ namespace SMH
 
             renderer = new OpenTKGL40();
 
-            skin = new Gwen.Skin.TexturedBase(renderer, "Skin.png");
-
+            skin = new Gwen.Skin.TexturedBase(renderer, "Res/Img/Skin.png");
             skin.DefaultFont = new Font(renderer, "Arial", 11);
             canvas = new Canvas(skin);
             input = new Gwen.Renderer.OpenTK.Input.OpenTK(this);
@@ -109,6 +108,10 @@ namespace SMH
             canvas.BackgroundColor = skin.Colors.ModalBackground;
             //canvas.KeyboardInputEnabled = true;
             canvas.Scale = 1.0f;
+            if (Global.options["StellarisFolder"] == "null")
+            {
+                //var c = new MessageBox(canvas);
+            }
             area = new Area(canvas);
 
             /*stopwatch.Restart();
@@ -181,7 +184,9 @@ namespace SMH
             {
                 example.Title = "Stellaris Mod Helper";
                 example.VSync = VSyncMode.On;
+                new ResourceLoader();
                 example.Run(); //0.0, 0.0);
+                
                 //example.TargetRenderFrequency = 60;
             }
     /*Application.EnableVisualStyles();
