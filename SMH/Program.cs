@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection.Emit;
+using System.Threading;
 using Gwen;
 using Gwen.CommonDialog;
 using OpenTK;
@@ -24,7 +25,9 @@ namespace SMH
         private Gwen.Skin.SkinBase skin;
         private Canvas canvas;
 
+        private StatusBar status;
 
+        private Stopwatch sw;
 
         private Area area;
         public bool fast = false;
@@ -93,7 +96,7 @@ namespace SMH
         /// <param name="e">Not used.</param>
         protected override void OnLoad(EventArgs e)
         {
-
+            sw = new Stopwatch();
             GL.ClearColor(System.Drawing.Color.MidnightBlue);
 
             Platform.Init(new Windows());
@@ -129,8 +132,8 @@ namespace SMH
             else{
                 PostInit();
             }
-            
-            
+
+            status = new StatusBar(canvas);
 
             /*stopwatch.Restart();
             lastTime = 0;*/
@@ -150,6 +153,9 @@ namespace SMH
         {
             renderer.Resize(Width, Height);
 
+
+            
+
             canvas.SetSize(Width, Height);
             OnRenderFrame(null);
         }
@@ -159,9 +165,8 @@ namespace SMH
         /// </summary>
         /// <param name="e">Contains timing information.</param>
         /// <remarks>There is no need to call the base implementation.</remarks>
-        protected void OnUpdateFrame(FrameEventArgs e)
-        {
-            
+        protected override void OnUpdateFrame(FrameEventArgs e){
+            status.Text = string.Format("Stellaris Mod Helper - {0:F0} fps", RenderFrequency);
         }
 
         /// <summary>
@@ -172,10 +177,18 @@ namespace SMH
         protected override void OnRenderFrame(FrameEventArgs e){
             
             GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-            
-            canvas.RenderCanvas();
-            
 
+            sw.Start(); 
+            canvas.RenderCanvas();
+            sw.Stop();
+
+            int tts = 33 - (int)sw.ElapsedMilliseconds;
+
+            if (tts > 0)
+            {
+                Thread.Sleep(tts);
+            }
+            sw.Reset();
             SwapBuffers();
         }
 

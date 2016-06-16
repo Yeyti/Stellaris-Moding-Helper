@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,17 @@ namespace SMH{
             
             AddData(ref Global.lang, "Res/Lang/" + Global.options["Lang"] + ".lang");
         }
-        
+
+        public static string ReadAllLines(string path)
+        {
+            byte[] data = File.ReadAllBytes(path);
+            return Encoding.UTF32.GetString(data);
+        }
+
         public string[] ReadFile(string File){
             string[] s;
             System.IO.StreamReader file = new System.IO.StreamReader(File,Encoding.Default);
-            s=file.ReadToEnd().Split('\n');
+            s = file.ReadToEndAsync().Result.Split('\n');
             file.Close();
             return s;
         }

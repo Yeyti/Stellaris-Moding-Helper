@@ -10,7 +10,7 @@ namespace SMH{
     
     using OpenTK = Gwen.Renderer.OpenTK;
     public class Area : DockBase{
-        private StatusBar status;
+        
         private ImagePanel img;
 
         private Gwen.Control.CollapsibleList m_List;
@@ -18,11 +18,10 @@ namespace SMH{
         public Area(ControlBase parent) : base(parent){
             Dock = Dock.Fill;
             SetSize(parent.Width, parent.Height);
-            status = new StatusBar(parent);
 
             if (Global.options["LoadBackground"] == "true"){
                 img = new ImagePanel(this);
-                img.ImageName = Global.options["GameFolder"] + @"\gfx\loadingscreens\load_1.dds";
+                img.ImageName = Global.options["GameFolder"] + @"\gfx\loadingscreens\load_6.dds";
             }
 
             MenuStrip menu = new MenuStrip(this);
@@ -79,15 +78,6 @@ namespace SMH{
                     t.Collapse();
                 };
             }
-        }
-
-        protected override void Render(Gwen.Skin.SkinBase skin){
-            
-            /*img.Width = Parent.Width;
-             img.Height = Parent.Height;*/
-             status.Text = String.Format("Stellaris Mod Helper - {0:F0} fps", 60);
-            
-            base.Render(skin);
         }
     }
 }
