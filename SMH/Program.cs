@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection.Emit;
 using System.Threading;
 using Gwen;
 using Gwen.CommonDialog;
@@ -33,9 +31,11 @@ namespace SMH
         public bool fast = false;
         private bool altDown = false;
 
+        private ResourceLoader resourceLoader;
+
         public Window(): base(1248, 720)
         {
-            
+            resourceLoader = new ResourceLoader();
 
             Keyboard.KeyDown += Keyboard_KeyDown;
             Keyboard.KeyUp += Keyboard_KeyUp;
@@ -94,8 +94,8 @@ namespace SMH
         /// Setup OpenGL and load resources here.
         /// </summary>
         /// <param name="e">Not used.</param>
-        protected override void OnLoad(EventArgs e)
-        {
+        protected override void OnLoad(EventArgs e){
+
             sw = new Stopwatch();
             GL.ClearColor(System.Drawing.Color.MidnightBlue);
 
@@ -114,23 +114,42 @@ namespace SMH
             canvas.BackgroundColor = skin.Colors.ModalBackground;
             //canvas.KeyboardInputEnabled = true;
             canvas.Scale = 1.0f;
-            if (Global.options["GameFolder"] == "null"){
-                var c = new MessageBox(canvas,@Global.lang["SMH.GameFolder.err"]);
-                c.Dismissed += (sender, arguments) =>{
-                    string Text = "";
-                    FolderBrowserDialog dialog = Component.Create<FolderBrowserDialog>(canvas);
-                    dialog.InitialFolder = "C:\\";
-                    dialog.Filters = "*|*";
-                    dialog.Callback = (path) => {
-                        Text = path != null ? path : "Cancelled";
-                        Global.options["GameFolder"] = Text;
-                        Global.SaveCfg(Global.options,"main.cfg");
-                        PostInit();
-                    };
-                };
+            Cfg.options.ToString();
+            if (Cfg.ActiveProfile == null){
+                Gwen.Control.Window w = new Gwen.Control.Window(canvas);
+                w.Size = new Size(300,300);
+                w.Title = Cfg.lang["ProffileExp.Win.Title"];
+                var bas = new DockBase(w);
+                bas.Dock = Dock.Fill;
+
+                
+                new Button(bas.TopDock.LeftDock);
+                new Button(bas.TopDock.RightDock);
+                ScrollControl ctrl = new ScrollControl(bas.BottomDock);
+                bas.Dock=Dock.Bottom;
+                new Label(ctrl).Text="ssdsd";
+
+
             }
             else{
-                PostInit();
+                if (Cfg.options["GameFolder"] == "null"){
+                    var c = new MessageBox(canvas, Cfg.lang["SMH.GameFolder.err"]);
+                    c.Dismissed += (sender, arguments) =>{
+                        string Text = "";
+                        FolderBrowserDialog dialog = Component.Create<FolderBrowserDialog>(canvas);
+                        dialog.InitialFolder = "C:\\";
+                        dialog.Filters = "*|*";
+                        dialog.Callback = (path) =>{
+                            Text = path != null ? path : "Cancelled";
+                            Cfg.options["GameFolder"] = Text;
+                            Cfg.SaveCfg(Cfg.options, "main.cfg");
+                            PostInit();
+                        };
+                    };
+                }
+                else{
+                    PostInit();
+                }
             }
 
             status = new StatusBar(canvas);
@@ -181,13 +200,9 @@ namespace SMH
             sw.Start(); 
             canvas.RenderCanvas();
             sw.Stop();
-
             int tts = 33 - (int)sw.ElapsedMilliseconds;
-
             if (tts > 0)
-            {
                 Thread.Sleep(tts);
-            }
             sw.Reset();
             SwapBuffers();
         }
@@ -220,14 +235,8 @@ namespace SMH
             {
                 example.Title = "Stellaris Mod Helper";
                 example.VSync = VSyncMode.On;
-                new ResourceLoader();
-                example.Run(); //0.0, 0.0);
-                
-                //example.TargetRenderFrequency = 60;
+                example.Run();
             }
-    /*Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());*/
     }
     }
 }

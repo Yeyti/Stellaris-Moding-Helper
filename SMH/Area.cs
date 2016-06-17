@@ -19,9 +19,9 @@ namespace SMH{
             Dock = Dock.Fill;
             SetSize(parent.Width, parent.Height);
 
-            if (Global.options["LoadBackground"] == "true"){
+            if (Cfg.options["LoadBackground"] == "true"){
                 img = new ImagePanel(this);
-                img.ImageName = Global.options["GameFolder"] + @"\gfx\loadingscreens\load_6.dds";
+                img.ImageName = Cfg.options["GameFolder"] + @"\gfx\loadingscreens\load_6.dds";
             }
 
             MenuStrip menu = new MenuStrip(this);
@@ -70,11 +70,21 @@ namespace SMH{
             ScrollControl ctrl = new ScrollControl(vs);
             ctrl.AutoHideBars = true;
             vs=new DockBase(ctrl);
-            foreach (var v in Global.options){
+            foreach (var v in Cfg.options){
                 var t =new Label(vs);
                 t.Text=v.Key + "=" + v.Value;
                 t.Dock=Dock.Top;
                 t.DoubleClicked += (sender, arguments) => { t.DelayedDelete();
+                    t.Collapse();
+                };
+            }
+            foreach (var v in Cfg.lang)
+            {
+                var t = new Label(vs);
+                t.Text = v.Key + "=" + v.Value;
+                t.Dock = Dock.Top;
+                t.DoubleClicked += (sender, arguments) => {
+                    t.DelayedDelete();
                     t.Collapse();
                 };
             }

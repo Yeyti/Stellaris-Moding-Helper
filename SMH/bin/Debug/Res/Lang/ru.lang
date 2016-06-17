@@ -1,5 +1,8 @@
-SMH.GameFolder.err=������� ���� �� ����� � �����.
-SMH.FileDialog.Name=����
-SMH.OK=O�
-SMH.Not=������
-SMH.Retry=���������
+﻿ProffileExp.Win.Title=Профиль не обнаружен
+ProffileExp.Gbx.Title=пожайлуста выберите из прфлей ниже или создайте новый
+
+SMH.GameFolder.err=укажите путь до папки с игрой.
+SMH.FileDialog.Name=путь
+SMH.OK=Oк
+SMH.Not=отмена
+SMH.Retry=повторить
