@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8996C611-7FA3-4DD4-B730-5EA17729BFC5}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SMH</RootNamespace>
     <AssemblyName>SMH</AssemblyName>
@@ -57,6 +57,9 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Gwen">
       <HintPath>Libs\Gwen.dll</HintPath>
@@ -80,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Area.cs" />
+    <Compile Include="Atributes\FItem.cs" />
     <Compile Include="BSpline.cs" />
     <Compile Include="CFG\Cfg.cs" />
     <Compile Include="CFG\Profile.cs" />
@@ -93,6 +97,9 @@
     <Compile Include="GL\VAO.cs" />
     <Compile Include="GL\VBO.cs" />
     <Compile Include="GL\Vertex.cs" />
+    <Compile Include="windows\Debug.cs" />
+    <Compile Include="windows\Menu.cs" />
+    <Compile Include="windows\Selecter.cs" />
     <Compile Include="ToolBar.cs" />
     <Compile Include="Unit.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

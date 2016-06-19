@@ -8,6 +8,7 @@ namespace SMH.CFG
 {
     public class Profile{
         public Dictionary<string, string> options;
+
         public string GamePath{
             get { return options["GamePath"]; }
             set { options["GamePath"] = value; }  
@@ -19,7 +20,6 @@ namespace SMH.CFG
         }
 
         public Profile(){
-            
         }
     }
 }

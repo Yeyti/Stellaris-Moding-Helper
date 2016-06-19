@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+
 using Gwen;
 using Gwen.CommonDialog;
 using OpenTK;
@@ -119,7 +120,10 @@ namespace SMH
                 Gwen.Control.Window w = new Gwen.Control.Window(canvas);
                 w.Size = new Size(300,300);
                 w.Title = Cfg.lang["ProffileExp.Win.Title"];
-                var bas = new DockBase(w);
+                w.Resizing = Resizing.None;
+                
+
+                /*var bas = new DockBase(w);
                 bas.Dock = Dock.Fill;
 
                 
@@ -127,12 +131,12 @@ namespace SMH
                 new Button(bas.TopDock.RightDock);
                 ScrollControl ctrl = new ScrollControl(bas.BottomDock);
                 bas.Dock=Dock.Bottom;
-                new Label(ctrl).Text="ssdsd";
-
+                new Label(ctrl).Text="ssdsd";*/
+                Selecter s = new Selecter(w);
 
             }
             else{
-                if (Cfg.options["GameFolder"] == "null"){
+                if (Cfg.ActiveProfile.GamePath == "null"){
                     var c = new MessageBox(canvas, Cfg.lang["SMH.GameFolder.err"]);
                     c.Dismissed += (sender, arguments) =>{
                         string Text = "";
@@ -141,8 +145,8 @@ namespace SMH
                         dialog.Filters = "*|*";
                         dialog.Callback = (path) =>{
                             Text = path != null ? path : "Cancelled";
-                            Cfg.options["GameFolder"] = Text;
-                            Cfg.SaveCfg(Cfg.options, "main.cfg");
+                            Cfg.ActiveProfile.GamePath = Text;
+                            Cfg.SaveCfg(Cfg.profiles, "profiles.cfg");
                             PostInit();
                         };
                     };
@@ -231,12 +235,13 @@ namespace SMH
         /// </summary>*/
         [STAThread]
         static void Main(){
+            
             using (Window example = new Window())
             {
                 example.Title = "Stellaris Mod Helper";
-                example.VSync = VSyncMode.On;
+                example.VSync = VSyncMode.Off;
                 example.Run();
             }
-    }
+        }
     }
 }
