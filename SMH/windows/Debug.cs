@@ -7,6 +7,10 @@ namespace SMH.windows
         private ScrollControl ctrl;
         DockBase vs;
 
+        public static void WriteLine(string s){
+            AllWindows.debug.Writeline(s);
+        }
+
         public void Writeline(string s){
             var t = new Label(vs);
             t.Text = s;

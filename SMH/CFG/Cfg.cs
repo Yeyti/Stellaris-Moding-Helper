@@ -34,9 +34,7 @@ namespace SMH
             using (StreamWriter sw = new StreamWriter("Res/Cfg/"+file, false)){
                 string[] buf = d.Keys.ToArray();
                 string[] buf2 = d.Values.ToArray();
-                Console.WriteLine("Res/Cfg/" + file);
                 for (int i = 0;i<buf.Length;i++){
-                    Console.WriteLine(buf[i] + "=" + buf2[i]);
                     sw.WriteLine(buf[i]+"="+buf2[i]);
                 }
                 sw.Close();

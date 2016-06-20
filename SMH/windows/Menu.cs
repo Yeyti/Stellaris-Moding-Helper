@@ -49,7 +49,7 @@ namespace SMH.windows
                 }
                 else{
                     Cfg.lang.Add(s.Substring(0, s.Length - 1), buf[j]);
-                    AllWindows.debug.Writeline(Cfg.lang["Err.Localization.MI"] +" "+ s.Substring(0, s.Length - 1));
+                    Debug.WriteLine(Cfg.lang["Err.Localization.MI"] +" "+ s.Substring(0, s.Length - 1));
                     ret += Cfg.lang[s.Substring(0, s.Length - 1)] + '\\';
                 }
                 
