@@ -3,32 +3,41 @@ using Gwen.Control;
 
 namespace SMH.windows
 {
-    class Debug:ControlBase
-    {
+    public class Debug:ControlBase{
+        private ScrollControl ctrl;
+        DockBase vs;
+
+        public void Writeline(string s){
+            var t = new Label(vs);
+            t.Text = s;
+            t.Dock = Dock.Top;
+            t.DoubleClicked += (sender, arguments) => destroy(t);
+        }
+
         public Debug(ControlBase b) : base(b){
-            ScrollControl ctrl = new ScrollControl(b);
+            ctrl = new ScrollControl(b);
             ctrl.AutoHideBars = true;
-            var vs = new DockBase(ctrl);
-            foreach (var v in Cfg.options)
+            vs = new DockBase(ctrl);
+            AllWindows.debug = this;
+            /*foreach (var v in Cfg.options)
             {
                 var t = new Label(vs);
                 t.Text = v.Key + "=" + v.Value;
                 t.Dock=Dock.Top;
-                t.DoubleClicked += (sender, arguments) => {
-                    t.DelayedDelete();
-                    t.Collapse();
-                };
+                t.DoubleClicked += (sender, arguments) => destroy(t);
             }
             foreach (var v in Cfg.lang)
             {
                 var t = new Label(vs);
                 t.Text = v.Key + "=" + v.Value;
                 t.Dock = Dock.Top;
-                t.DoubleClicked += (sender, arguments) => {
-                    t.DelayedDelete();
-                    t.Collapse();
-                };
-            }
+                t.DoubleClicked += (sender, arguments) => destroy(t);
+            }*/
+        }
+
+        public void destroy(Label t){
+            t.DelayedDelete();
+            t.Collapse();
         }
     }
 }

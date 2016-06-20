@@ -12,6 +12,13 @@ namespace SMH.windows
         private MenuStrip menu;
         public SMHMenu(ControlBase b) : base(b){
             menu = new MenuStrip(this);
+            menu.AddItem(Cfg.lang["FMenu.File"]);
+            menu.AddItem(Cfg.lang["FMenu.Edit"]);
+            menu.AddItem(Cfg.lang["FMenu.Project"]);
+            menu.AddItem(Cfg.lang["FMenu.Analys"]);
+            menu.AddItem(Cfg.lang["FMenu.window"]);
+            menu.AddItem(Cfg.lang["FMenu.Options"]);
+            menu.AddItem(Cfg.lang["FMenu.About"]);
             Info();
         }
         private void Info(){
@@ -20,12 +27,34 @@ namespace SMH.windows
                 foreach (var n in d.DeclaredMethods){
                     FItem a = (FItem) n.GetCustomAttribute(typeof(FItem));
                     if (a != null){
-                        menu.AddItemPath(a.item).Clicked += delegate {
+                        
+                        menu.AddItemPath(PickLanguage(a.item)).Clicked += delegate {
                             n.Invoke(d, null);
                         };
                     }
                 }
             }   
+        }
+
+        public string PickLanguage(string name){
+            string ret = "";
+            string[] buf = name.Split('\\', '/');
+            for (int j = 0; j < buf.Length; j++){
+                string s = "FMenu.";
+                for (int i = 0; i <= j; i++){
+                    s += buf[i]+".";
+                }
+                if (Cfg.lang.ContainsKey(s.Substring(0, s.Length - 1))){
+                    ret += Cfg.lang[s.Substring(0, s.Length - 1)] + '\\';
+                }
+                else{
+                    Cfg.lang.Add(s.Substring(0, s.Length - 1), buf[j]);
+                    AllWindows.debug.Writeline(Cfg.lang["Err.Localization.MI"] +" "+ s.Substring(0, s.Length - 1));
+                    ret += Cfg.lang[s.Substring(0, s.Length - 1)] + '\\';
+                }
+                
+            }
+            return ret.Substring(0, ret.Length - 1);
         }
     }
 }

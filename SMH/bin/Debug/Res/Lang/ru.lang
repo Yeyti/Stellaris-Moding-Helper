@@ -1,8 +1,19 @@
 ﻿ProffileExp.Win.Title=Профиль не обнаружен
 ProffileExp.Gbx.Title=пожайлуста выберите из прфлей ниже или создайте новый
 
+Err.Localization.MI=Ошибка, не найдена строка с переводом:
+
 SMH.GameFolder.err=укажите путь до папки с игрой.
 SMH.FileDialog.Name=путь
 SMH.OK=Oк
 SMH.Not=отмена
 SMH.Retry=повторить
+
+FMenu.File=Файл
+FMenu.File.SaveCfg=Сохранить конфиги
+FMenu.Edit=Правка
+FMenu.Project=Проект
+FMenu.Analys=Анализ
+FMenu.window=Окно
+FMenu.Options=Настройки
+FMenu.About=Создатели

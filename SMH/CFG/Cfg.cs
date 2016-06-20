@@ -9,6 +9,7 @@ using Gwen.CommonDialog;
 using Gwen.Control;
 using SMH.Atributes;
 using SMH.CFG;
+using SMH.windows;
 
 namespace SMH
 {
@@ -33,7 +34,9 @@ namespace SMH
             using (StreamWriter sw = new StreamWriter("Res/Cfg/"+file, false)){
                 string[] buf = d.Keys.ToArray();
                 string[] buf2 = d.Values.ToArray();
+                Console.WriteLine("Res/Cfg/" + file);
                 for (int i = 0;i<buf.Length;i++){
+                    Console.WriteLine(buf[i] + "=" + buf2[i]);
                     sw.WriteLine(buf[i]+"="+buf2[i]);
                 }
                 sw.Close();
@@ -41,8 +44,8 @@ namespace SMH
         }
         [FItem("File/SaveCfg")]
         public static void SaveAll(){
-            SaveCfg(options,"main");
-            SaveCfg(profiles,"profiles");
+            SaveCfg(options,"main.cfg");
+            SaveCfg(profiles,"profiles.cfg");
         }
 
         public static void SaveCfg(Dictionary<string, Profile> d, string file)

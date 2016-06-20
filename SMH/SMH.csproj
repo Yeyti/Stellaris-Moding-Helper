@@ -82,6 +82,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllWindows.cs" />
     <Compile Include="Area.cs" />
     <Compile Include="Atributes\FItem.cs" />
     <Compile Include="BSpline.cs" />

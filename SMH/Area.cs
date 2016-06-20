@@ -23,7 +23,7 @@ namespace SMH{
             SetSize(parent.Width, parent.Height);
             Back();
 
-            new SMHMenu(this);
+            
             
             /* ((MenuItem)(menu.Children[0])).Menu.AddItem("a").Menu.AddItem("b");
             new DockBase(this).Dock=Dock.Fill;
@@ -34,7 +34,7 @@ namespace SMH{
 
             DockBase dock = new DockBase(this);
             //new ToolWindow(dock.TopDock);
-            dock.Margin = new Margin(0, 51, 0, 0);
+            dock.Margin = new Margin(0, 25, 0, 0);
             //dock.Dock = Dock.Fill;
 
             //mi.Dock = Dock.Top;
@@ -46,7 +46,9 @@ namespace SMH{
             dock.RightDock.TabControl.AddPage("Elements");
             dock.RightDock.TopDock.TabControl.AddPage("Project");
             new Debug(dock.BottomDock.TabControl.AddPage("Debug").Page);
-            
+
+            new SMHMenu(this);
+
         }
 
         void Back(){
