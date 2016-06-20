@@ -99,7 +99,10 @@
     <Compile Include="GL\VBO.cs" />
     <Compile Include="GL\Vertex.cs" />
     <Compile Include="windows\Debug.cs" />
+    <Compile Include="windows\Elements.cs" />
+    <Compile Include="windows\Game.cs" />
     <Compile Include="windows\Menu.cs" />
+    <Compile Include="windows\Project.cs" />
     <Compile Include="windows\Selecter.cs" />
     <Compile Include="ToolBar.cs" />
     <Compile Include="Unit.cs" />

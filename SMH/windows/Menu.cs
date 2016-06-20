@@ -12,6 +12,11 @@ namespace SMH.windows
         private MenuStrip menu;
         public SMHMenu(ControlBase b) : base(b){
             menu = new MenuStrip(this);
+            init();
+            Info();
+        }
+
+        private void init(){
             menu.AddItem(Cfg.lang["FMenu.File"]);
             menu.AddItem(Cfg.lang["FMenu.Edit"]);
             menu.AddItem(Cfg.lang["FMenu.Project"]);
@@ -19,17 +24,25 @@ namespace SMH.windows
             menu.AddItem(Cfg.lang["FMenu.window"]);
             menu.AddItem(Cfg.lang["FMenu.Options"]);
             menu.AddItem(Cfg.lang["FMenu.About"]);
+        }
+
+        [FItem("Options/Redraw")]
+        private void redraw(){
+            menu.DelayedDelete();
+            menu=new MenuStrip(this);
+            init();
             Info();
         }
+        
         private void Info(){
+            
             var s = Assembly.GetCallingAssembly().DefinedTypes;
             foreach (var d in s){
                 foreach (var n in d.DeclaredMethods){
                     FItem a = (FItem) n.GetCustomAttribute(typeof(FItem));
                     if (a != null){
-                        
                         menu.AddItemPath(PickLanguage(a.item)).Clicked += delegate {
-                            n.Invoke(d, null);
+                            n.Invoke(this,null);
                         };
                     }
                 }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SMH.windows;
+﻿using SMH.windows;
 
 namespace SMH
 {
     public static class AllWindows{
         public static Debug debug;
+        public static Project project;
+        public static Game game;
+        public static Elements elements;
     }
 }

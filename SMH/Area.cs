@@ -22,29 +22,13 @@ namespace SMH{
             Dock = Dock.Fill;
             SetSize(parent.Width, parent.Height);
             Back();
-
-            
-            
-            /* ((MenuItem)(menu.Children[0])).Menu.AddItem("a").Menu.AddItem("b");
-            new DockBase(this).Dock=Dock.Fill;
-            Dragger dr = new Dragger(new ImagePanel(Children[2]));//.ImageName = @"D:\Games\Stellaris\gfx\loadingscreens\load_1.dds");
-            dr.DragAndDrop_Draggable();
-            Children[2].Size =new Size(100);
-            Children[2].DragAndDrop_Draggable();*/
-
             DockBase dock = new DockBase(this);
-            //new ToolWindow(dock.TopDock);
-            dock.Margin = new Margin(0, 25, 0, 0);
-            //dock.Dock = Dock.Fill;
 
-            //mi.Dock = Dock.Top;
-            m_List = new Gwen.Control.CollapsibleList(parent);
-            m_List.Add("Data").Add("s");
-            m_List.Add("Mod").Add("s");
-            m_List.Add("ED").Add("s");
-            dock.LeftDock.TabControl.AddPage("Game", m_List);
-            dock.RightDock.TabControl.AddPage("Elements");
-            dock.RightDock.TopDock.TabControl.AddPage("Project");
+            dock.Margin = new Margin(0, 26, 0, 0);
+
+            new Game(dock.LeftDock.TabControl.AddPage("Game").Page);
+            new Elements(dock.RightDock.TabControl.AddPage("Elements").Page);
+            new Debug(dock.RightDock.TopDock.TabControl.AddPage("Project").Page);
             new Debug(dock.BottomDock.TabControl.AddPage("Debug").Page);
 
             new SMHMenu(this);
