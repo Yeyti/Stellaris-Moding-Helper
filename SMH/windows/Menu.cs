@@ -35,7 +35,6 @@ namespace SMH.windows
         }
         
         private void Info(){
-            
             var s = Assembly.GetCallingAssembly().DefinedTypes;
             foreach (var d in s){
                 foreach (var n in d.DeclaredMethods){

@@ -11,8 +11,6 @@ namespace SMH.Atributes
         public string item { get; set;}
         public FItem(string name){
             item = name;
-            
         }
-
     }
 }

@@ -26,13 +26,18 @@ namespace SMH{
 
             dock.Margin = new Margin(0, 26, 0, 0);
 
+            
+
             new Game(dock.LeftDock.TabControl.AddPage("Game").Page);
             new Elements(dock.RightDock.TabControl.AddPage("Elements").Page);
-            new Debug(dock.RightDock.TopDock.TabControl.AddPage("Project").Page);
+            dock.RightDock.Width = 300;
+            new Project(dock.RightDock.TopDock.TabControl.AddPage("Project").Page);
             new Debug(dock.BottomDock.TabControl.AddPage("Debug").Page);
 
             new SMHMenu(this);
 
+
+            Debug.WriteLine("sd", @"D:\Games\Stellaris\gfx\interface\main\time_bg.dds");
         }
 
         void Back(){
