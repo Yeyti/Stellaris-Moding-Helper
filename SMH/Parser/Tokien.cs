@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 namespace SMH.Parser
 {
     class Tokien{
-        public string data;
-        public Tokien name;
-        public Tokien value;
+        public string value; //maybe of file with element & elements param
+        public Dictionary<string, Tokien> data;
 
         public bool isInit
         {
             get
             {
-                if (name != null && value != null)
+                if (data != null)
                     return false;
                 return true;
             }
@@ -24,20 +23,19 @@ namespace SMH.Parser
 
         public Tokien()
         {}
+
         public Tokien(string data){
-            this.data = data;
+            this.value = data;
         }
-        public Tokien(ref string data)
-        {
-            this.data = data;
+        public Tokien(ref string data){
+            this.value = data;
         }
-        public Tokien(string data,Tokien name,Tokien value){
-            this.data = data;
-            this.name = name;
+        public Tokien(string value,Dictionary<string,Tokien> data){
             this.value = value;
+            this.data = data;
         }
-        
-        
+
+
 
     }
 }

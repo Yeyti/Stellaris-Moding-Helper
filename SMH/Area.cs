@@ -6,6 +6,7 @@ using Gwen.Control;
 using Gwen.Control.Internal;
 using Gwen.Control.Layout;
 using Gwen.RichText;
+using SMH.Parser;
 using SMH.windows;
 
 
@@ -14,7 +15,7 @@ namespace SMH{
     using OpenTK = Gwen.Renderer.OpenTK;
     public class Area : DockBase{
         
-        private ImagePanel img;
+        public ImagePanel img;
 
         private Gwen.Control.CollapsibleList m_List;
 
@@ -25,7 +26,7 @@ namespace SMH{
             DockBase dock = new DockBase(this);
 
             dock.Margin = new Margin(0, 26, 0, 0);
-
+            
             
 
             new Game(dock.LeftDock.TabControl.AddPage("Game").Page);
@@ -36,8 +37,8 @@ namespace SMH{
 
             new SMHMenu(this);
 
-
-            Debug.WriteLine("sd", @"D:\Games\Stellaris\gfx\interface\main\time_bg.dds");
+            
+            Data.loadData();
         }
 
         void Back(){

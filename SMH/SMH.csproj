@@ -70,6 +70,7 @@
     <Reference Include="Gwen.Renderer.OpenTK">
       <HintPath>Libs\Gwen.Renderer.OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\OpenTK.dll</HintPath>
@@ -80,6 +81,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllWindows.cs" />
@@ -88,6 +90,9 @@
     <Compile Include="BSpline.cs" />
     <Compile Include="CFG\Cfg.cs" />
     <Compile Include="CFG\Profile.cs" />
+    <Compile Include="Parser\Data.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Parser\Tokien.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CFG\ResourceLoader.cs" />
